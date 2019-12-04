@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="● HTTP通讯协议（Hypertext Transfer Protocol） ● AJAX（ Asynchronous JavaScript and XML）  第一章 HTTP通讯协议1. 简介协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。 HTTP（超文本传输协议）是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。 HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web前后端数据交互">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;04&#x2F;web%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92&#x2F;index.html">
+<meta property="og:site_name" content="帅民的博客">
+<meta property="og:description" content="● HTTP通讯协议（Hypertext Transfer Protocol） ● AJAX（ Asynchronous JavaScript and XML）  第一章 HTTP通讯协议1. 简介协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。 HTTP（超文本传输协议）是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。 HTTP">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="c:&#x2F;Users&#x2F;%E6%9D%8E%E5%A8%9C%E5%A8%9C&#x2F;Desktop&#x2F;%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99&#x2F;02%20%E4%B8%AD%E7%BA%A7&#x2F;2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B&#x2F;%E6%95%99%E6%A1%88&#x2F;Web%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%8A%80%E6%9C%AF&#x2F;images&#x2F;http.png">
+<meta property="og:image" content="c:&#x2F;Users&#x2F;%E6%9D%8E%E5%A8%9C%E5%A8%9C&#x2F;Desktop&#x2F;%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99&#x2F;02%20%E4%B8%AD%E7%BA%A7&#x2F;2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B&#x2F;%E6%95%99%E6%A1%88&#x2F;Web%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%8A%80%E6%9C%AF&#x2F;images&#x2F;ajax.jpg">
+<meta property="og:image" content="c:&#x2F;Users&#x2F;%E6%9D%8E%E5%A8%9C%E5%A8%9C&#x2F;Desktop&#x2F;%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99&#x2F;02%20%E4%B8%AD%E7%BA%A7&#x2F;2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B&#x2F;%E6%95%99%E6%A1%88&#x2F;PHP%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8&#x2F;images&#x2F;cookie.png">
+<meta property="og:updated_time" content="2019-07-01T07:35:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:&#x2F;Users&#x2F;%E6%9D%8E%E5%A8%9C%E5%A8%9C&#x2F;Desktop&#x2F;%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99&#x2F;02%20%E4%B8%AD%E7%BA%A7&#x2F;2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B&#x2F;%E6%95%99%E6%A1%88&#x2F;Web%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%8A%80%E6%9C%AF&#x2F;images&#x2F;http.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/04/web%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>web前后端数据交互 | 帅民的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">帅民的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">努力进取的程序猿</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">4</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/web%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/toux.jpg">
+      <meta itemprop="name" content="帅民">
+      <meta itemprop="description" content="喜欢爱笑的人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="帅民的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          web前后端数据交互
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-04 10:15:27" itemprop="dateCreated datePublished" datetime="2019-12-04T10:15:27+08:00">2019-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-07-01 15:35:10" itemprop="dateModified" datetime="2019-07-01T15:35:10+08:00">2019-07-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>● HTTP通讯协议（Hypertext Transfer Protocol）</p>
+<p>● AJAX（ Asynchronous JavaScript and XML）</p>
+<hr>
+<h1 id="第一章-HTTP通讯协议"><a href="#第一章-HTTP通讯协议" class="headerlink" title="第一章 HTTP通讯协议"></a>第一章 HTTP通讯协议</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。</p>
+<p>HTTP（超文本传输协议）是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。</p>
+<p>HTTP消息结构</p>
+<table>
+<thead>
+<tr>
+<th>结构</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>request line</td>
+<td>请求行：第一行必须是请求行，用来说明请求类型、要访问的资源以及使用的HTTP版本。</td>
+</tr>
+<tr>
+<td>header</td>
+<td>请求头：用来说明服务器要使用的附加信息。</td>
+</tr>
+<tr>
+<td>blank line</td>
+<td>空白行：请求头部与请求体之间必须有一个空白行，必不可少</td>
+</tr>
+<tr>
+<td>body</td>
+<td>请求体：也叫请求正文，可以添加任意的其他数据</td>
+</tr>
+</tbody></table>
+<p><img src="C:/Users/%E6%9D%8E%E5%A8%9C%E5%A8%9C/Desktop/%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99/02%20%E4%B8%AD%E7%BA%A7/2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B/%E6%95%99%E6%A1%88/Web%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%8A%80%E6%9C%AF/images/http.png" alt="http"></p>
+<table>
+<thead>
+<tr>
+<th>状态行</th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Host</td>
+<td>接受请求的服务器地址，可以是：<code>IP：端口</code> 或 <code>域名</code></td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>发送请求的应用程序名称（浏览器信息）</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>指定与连接相关的属性，如：Connection:Keep-Alive</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>客户端可以接受的编码格式</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>客户端可以接受的数据压缩格式</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>客户端可以接受的语言</td>
+</tr>
+<tr>
+<td>referer</td>
+<td>当前请求来自哪个链接（防盗连）</td>
+</tr>
+<tr>
+<td>content-type</td>
+<td>请求的文件类型</td>
+</tr>
+<tr>
+<td>cookie</td>
+<td>该网站相关的会话信息</td>
+</tr>
+</tbody></table>
+<h2 id="2-特点"><a href="#2-特点" class="headerlink" title="2. 特点"></a>2. 特点</h2><p>单向请求，HTTP协议永远都是客户端发起请求，服务器回送响应。这样就限制了使用HTTP协议，无法实现在客户端没有发起请求的时候，服务器将消息推送给客户端。</p>
+<h2 id="3-工作流程"><a href="#3-工作流程" class="headerlink" title="3. 工作流程"></a>3. 工作流程</h2><p>一次HTTP操作称为一个事务，其工作过程可分为四步：</p>
+<ol>
+<li><p>首先客户机与服务器需要建立连接。</p>
+</li>
+<li><p>建立连接后，客户机发送一个请求给服务器，请求方式的格式为：统一资源标识符（URL）、协议版本号，客户机信息和可能的内容。</p>
+</li>
+<li><p>服务器接到请求后，给予相应的响应信息，其格式为一个状态行，包括信息的协议版本号、一个成功或错误的代码（status Code状态码），后边服务器信息、实体信息和可能的内容。</p>
+</li>
+<li><p>客户端接收完服务器所返回的信息后，与服务器断开连接。</p>
+<p>如果在以上过程中的某一步出现错误，那么产生错误的信息将返回到客户端。</p>
+<p>对于用户来说，这些过程是由HTTP自己完成的，用户只要用鼠标点击，等待信息显示就可以了。</p>
+</li>
+</ol>
+<h2 id="4-Status-Code"><a href="#4-Status-Code" class="headerlink" title="4. Status Code"></a>4. Status Code</h2><p>Status Code是HTTP协议状态码，当发起http请求后，服务器端会会返回不同的状态码，用以标示其工作状态：</p>
+<p><strong>1xx：信息，服务器收到请求，需要请求者继续执行操作</strong></p>
+<p>100    继续。客户端应继续其请求<br>101    切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议</p>
+<p><strong>2xx</strong>：成功，操作被成功接收并处理</p>
+<p>200    请求成功。一般用于GET与POST请求<br>201    已创建。成功请求并创建了新的资源<br>202    已接受。已经接受请求，但未处理完成<br>203    非授权信息。请求成功。<br>204    无内容。服务器成功处理，但未返回内容。</p>
+<p><strong>3xx</strong>：重定向，需要进一步的操作以完成请求</p>
+<p>300    请求的资源可在多处得到<br>301    删除请求数据<br>304    网页自请求者上次请求后再也没有更改过 </p>
+<p><strong>4xx</strong>：客户端错误，请求包含语法错误或无法完成请求</p>
+<p>400    错误请求，如语法错误<br>401    请求授权失败<br>403    请求不允许<br>404    没有发现文件、查询或URl</p>
+<p><strong>5xx</strong>：服务器错误，服务器在处理请求的过程中发生了错误</p>
+<p>500    服务器产生内部错误<br>502    服务器暂时不可用，有时是为了防止发生系统过载<br>503    服务器过载或暂停维修<br>505    服务器不支持或拒绝支请求头中指定的HTTP版本</p>
+<h1 id="第二章-AJAX的实现"><a href="#第二章-AJAX的实现" class="headerlink" title="第二章 AJAX的实现"></a>第二章 AJAX的实现</h1><h2 id="1-简介-1"><a href="#1-简介-1" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>   synchronous：同步</p>
+<p>Asynchronous：异步</p>
+<p>AJAX（Asynchronous JavaScript and XML） 是一种在无需重新加载整个页面，仅更新部分网页的<strong>技术</strong>。</p>
+<p>AJAX 通过<strong>异步</strong>方式与服务器进行少量数据交换。</p>
+<p><img src="C:/Users/%E6%9D%8E%E5%A8%9C%E5%A8%9C/Desktop/%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99/02%20%E4%B8%AD%E7%BA%A7/2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B/%E6%95%99%E6%A1%88/Web%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%8A%80%E6%9C%AF/images/ajax.jpg" alt="ajax"></p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>页面无需刷新，用户的体验非常好。</li>
+<li>使用异步方式与服务器通信，具有更加迅速的响应能力。</li>
+<li>可以把一些服务器负担的工作转嫁到客户端，减轻服务器和宽带的负担，节约空间和宽带租用成本。ajax的原则是“按需取数据”，可以最大程度的减少冗余请求和响应对服务器造成的负担。</li>
+<li>基于标准化、并被广泛支持的技术，不需要下载插件或者小程序。</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li>ajax不支持浏览器back按钮</li>
+<li>ajax暴露了与服务器交互的细节，存在安全隐患</li>
+<li>对搜索引擎的支持比较弱</li>
+<li>破坏了程序的异常机制</li>
+<li>不容易调试  </li>
+</ol>
+<h2 id="2-AJAX工作原理"><a href="#2-AJAX工作原理" class="headerlink" title="2. AJAX工作原理"></a>2. AJAX工作原理</h2><p>既然Ajax能够发送HTTP请求，整个请求的过程就必须要符合HTTP协议。Ajax发送HTTP请求时需要指定以下参数：</p>
+<ol>
+<li>要请求的资源即URL地址。</li>
+<li>指定请求的方式，常用的有get和post。</li>
+<li>指定需要发送给服务器的数据，以“名=值&amp;名=值”的方式书写。</li>
+<li>指定可以接收的数据类型，即告诉服务器可以回传的内容类型是什么，包括：HTML、JS脚本、JSON、XML等，常用的是文本txt和JSON。</li>
+</ol>
+<p>以上参数就包含了Ajax发送HTTP请求时请求头中的信息，但服务器响应后会回传结果，因此Ajax还必须有能够接收服务器回传的结果的参数。</p>
+<p>匿名函数success:function(re){  }。re变量用于接收服务器回传的结果。</p>
+<p>Ajax的基本格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">	url:&apos;请求的资源&apos;,</span><br><span class="line">	type:&apos;请求方式get|post&apos;,</span><br><span class="line">	data:&apos;发送数据 名=值&amp;名=值&apos;,</span><br><span class="line">	dataType:&apos;回传值的类型&apos;,</span><br><span class="line">	success:function(re)&#123; re接收返回值</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>![ajax工作原理](C:\Users\李娜娜\Desktop\教研材料\02 中级\2-教案及其他可选案例\教案\Web前后端交互技术\images\ajax工作原理.png)</p>
+<h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><p>可扩展标记语言(eXtensible Markup Language)，是一种用于标记电子文件使其具有结构性的标记语言。</p>
+<p>XML和HTML的区别：</p>
+<table>
+<thead>
+<tr>
+<th>XML</th>
+<th>HTML</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>所有的标记必须成对出现</td>
+<td>不是所有的都需要成对出现</td>
+</tr>
+<tr>
+<td>区分大小写</td>
+<td>不区分大小写</td>
+</tr>
+</tbody></table>
+<p>由于XML结构过于复杂，逐渐被JSON格式所取代。</p>
+<p>XMLHttpRequest对象是window的一个方法（构造函数），用于在后台与服务器交换数据，所有现代的浏览器都支持该对象，它能够实现：</p>
+<p>在后台（异步方式）向服务器发送数据</p>
+<p>在页面已加载后从服务器 请求/接收 数据，在不重新加载页面的情况下更新网页</p>
+<p>尽管名为 XMLHttpRequest，它并不限于和 XML 文档一起使用：它可以接收任何形式的文本文档</p>
+<p>AJAX通过操作XMLHttpRequest对象，与服务器异步交互数据，要完整实现一个AJAX异步调用和局部刷新,通常需要以下几个步骤:</p>
+<ol>
+<li>创建XMLHttpRequest对象</li>
+<li>创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息.</li>
+<li>发送数据</li>
+<li>接收数据</li>
+</ol>
+<h1 id="第三章-JSONP"><a href="#第三章-JSONP" class="headerlink" title="第三章 JSONP"></a>第三章 JSONP</h1><p>Jsonp(JSON with Padding) 可以<strong>异步、跨域</strong>进行数据请求。</p>
+<p>ajax由于受到同源策略的限制，不能进行跨域请求，但在某些情况下，又需要进行跨域请求数据，就诞生了jsonp技术，严格说，jsonp不是技术，是 json 的一种”使用模式”。</p>
+<p>实现jsonp跨域请求，需要前后两端进行配合。</p>
+<h2 id="1-hello-world"><a href="#1-hello-world" class="headerlink" title="1. hello world"></a>1. hello world</h2><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>html页面中的，有三种标签，可以跨域（get）请求资源，分别是：link 、img、script，试着用script发送一个异步请求：</p>
+<p><strong>域：127.0.0.1:8888</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">play</span><span class="params">(obj)</span></span>&#123;</span></span><br><span class="line">        alert(obj.msg);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://127.0.0.1:8000/doAction.php?callback=play"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>声明了一个play函数</li>
+<li>从127.0.0.1:8888域 向 127.0.0.1:8000域的doAction.php接口发送了get请求，并带有cb=play的参数</li>
+</ol>
+<h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><p>用php创建一个后端接口：doAction.php</p>
+<p><strong>域：127.0.0.1:8000</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> 	$fn=$_GET[<span class="string">"callback"</span>];</span><br><span class="line">	$json=<span class="string">'&#123;"msg":"hello world"&#125;'</span>;<span class="comment">//json格式的数据</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&#123;$fn&#125;($json)"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p>play函数被调用，弹出”hello world“。</p>
+<h2 id="2-原理"><a href="#2-原理" class="headerlink" title="2. 原理"></a>2. 原理</h2><p>以上就是一个完整的jsonp，在这个案例中：</p>
+<ol>
+<li>前端将要调用的函数名play，作为参数传递给后台</li>
+<li>后台接收参数，返回一个字符串，字符串的的内容就是调用play函数的语句，并且带有json格式数据的参数</li>
+<li>前端接收到后端返回的字符串，既然是script标签发出的请求，接收回来的字符串就会被当做命令执行，该命令调用已经定义好的play函数，同时接收到了传递过来的json格式数据。</li>
+</ol>
+<p>以上步骤，是实现一个jsonp的标准流程和基本原理。在这个过程中，如果前后端约定好了回调函数的名称，那cb这一传参步骤可以省略。</p>
+<p>既然可以通过get传参，那么，前端就可以将其他请求信息传递到后端，完成更复杂的异步请求数据的操作。</p>
+<p><strong>注意：</strong></p>
+<p><strong>后端只能以json格式作为参数</strong>（jsonp也是因此得名的）。</p>
+<h1 id="第四章-iframe页面异步通信"><a href="#第四章-iframe页面异步通信" class="headerlink" title="第四章 iframe页面异步通信"></a>第四章 iframe页面异步通信</h1><h2 id="1-简介-2"><a href="#1-简介-2" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>iframe是HTML的一个标签，我们知道，每个HTML标签都会在页面上呈现不同的内容，iframe标签的作用就是在页面中再开放出一个窗口，且这个窗口能够重新显示一个页面。</p>
+<p>所以iframe称作页面内框架，可以理解为页面中的页面。</p>
+<h2 id="2-JS操作iframe标签"><a href="#2-JS操作iframe标签" class="headerlink" title="2. JS操作iframe标签"></a>2. JS操作iframe标签</h2><p>Js操作iframe标签过程分为2步：</p>
+<ol>
+<li>找到iframe标签</li>
+<li>操作iframe标签</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>发布聊天内容：<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"fr1"</span> <span class="attr">style</span>=<span class="string">"height:50px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        姓名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"namer"</span> <span class="attr">name</span>=<span class="string">"namer"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        内容：<span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"content"</span> <span class="attr">name</span>=<span class="string">"content"</span> <span class="attr">style</span>=<span class="string">"height:50px;width:300px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"发送"</span> <span class="attr">onclick</span>=<span class="string">"sendMessage();"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="function"><span class="keyword">function</span> <span class="title">sendMessage</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//获取两个输入框中的值</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> n = <span class="built_in">document</span>.getElementById(<span class="string">'namer'</span>).value;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).value;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//拼接url地址</span></span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> urlStr = <span class="string">"do.php?namer="</span> + n + <span class="string">"&amp;content="</span> + c;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//把urlStr值赋给iframe的src属性</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">document</span>.getElementById(<span class="string">'fr1'</span>).src = urlStr;</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>编写Js中调用的php文件，该php文件主要功能是将输入的内容打印打印出来，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">$namer = $_GET[<span class="string">'namer'</span>];</span><br><span class="line">$content = $_GET[<span class="string">'content'</span>];</span><br><span class="line">var_dump($namer,$content);</span><br></pre></td></tr></table></figure>
+
+<p>在点击发送数据的时候并没有刷新整个页面，而是借助于iframe标签实现了页面的异步刷新。当然，我们也可以在点击发送的时候向服务器发送数据，并借助iframe实现页面异步刷新。</p>
+<h2 id="3-JQuery操作iframe标签"><a href="#3-JQuery操作iframe标签" class="headerlink" title="3. JQuery操作iframe标签"></a>3. JQuery操作iframe标签</h2><p>同Js一样，JQuery操作iframe标签过程也分为2步：</p>
+<ol>
+<li>找到iframe标签</li>
+<li>操作iframe标签</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">        &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">        &lt;script type="text/</span>javascript<span class="string">" src="</span>https:<span class="comment">//code.jquery.com/jquery-3.4.0.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">    &lt;body&gt;</span></span><br><span class="line"><span class="regexp">        &lt;h1&gt;发布聊天内容：&lt;/</span>h1&gt;</span><br><span class="line">        &lt;iframe id=<span class="string">"fr1"</span> style=<span class="string">"height:50px;"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span></span><br><span class="line">        姓名：&lt;input type="text" id="namer" name="namer"&gt;&lt;br&gt;</span><br><span class="line">        内容：&lt;textarea id="content" name="content" style="height:200px;width:500px;"&gt;&lt;/textarea&gt;&lt;br&gt;</span><br><span class="line">        &lt;input type="button" value="发送" onclick="sendMessage();" /&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">    &lt;script type="text/javascript"&gt;</span><br><span class="line">        function sendMessage () &#123;</span><br><span class="line">            //获取两个输入框中的值</span><br><span class="line">            var n = $("[name='namer']").val();</span><br><span class="line">            var c = $("[name='content']").val();</span><br><span class="line">            //拼接url地址</span><br><span class="line">            var urlStr = "do.php?namer=" + n + "&amp;content=" + c;</span><br><span class="line">            //把urlStr值赋给iframe的src属性</span><br><span class="line">            $("#fr1").attr('src', urlStr)</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后编写Js中调用的php文件，该php文件主要功能是将输入的内容插入到服务器的数据库中，并返会插入成功的条目数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$namer = $_GET[<span class="string">'namer'</span>];</span><br><span class="line">$content = $_GET[<span class="string">'content'</span>];</span><br><span class="line">$pdo = <span class="keyword">new</span> PDO(<span class="string">'mysql:host=localhost;dbname=php'</span>,<span class="string">'root'</span>,<span class="string">'123456'</span>);</span><br><span class="line">$sql = <span class="string">"insert into token(namer,content,pubtime) value('"</span>.$namer.<span class="string">"','"</span>.$content.<span class="string">"',"</span>.time().<span class="string">")"</span>;</span><br><span class="line">$re = $pdo-&gt;exec($sql);</span><br><span class="line">var_dump($re);</span><br></pre></td></tr></table></figure>
+
+<h1 id="第五章-页面性能优化技术"><a href="#第五章-页面性能优化技术" class="headerlink" title="第五章 页面性能优化技术"></a>第五章 页面性能优化技术</h1><blockquote>
+<p>会话控制是一种跟踪用户的通信方式</p>
+<p>例如：当一个用户在请求一个页面后，再次请求这个页面，网站是无法知道这个用户刚才是否曾经来访问过。由此我们就会觉得奇怪，平时我们在电商网站购物时，只要我们在这个站点内，不论我们怎么跳转页面，网站总会记得我是谁，这是怎么做到的呢？这就是运用了HTTP会话控制。在网站中跟踪一个变量，通过对变量的跟踪，使多个请求事物之间建立联系，根据授权和用户身份显示不同的内容、不同页面。</p>
+</blockquote>
+<p><img src="C:/Users/%E6%9D%8E%E5%A8%9C%E5%A8%9C/Desktop/%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99/02%20%E4%B8%AD%E7%BA%A7/2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B/%E6%95%99%E6%A1%88/PHP%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/images/cookie.png" alt="cookie.gif"></p>
+<p>Cookie是一种会话变量。会话变量是用来存放数据的一个容器，这个容器对应的就是内存空间。</p>
+<h2 id="1-Cookie的创建、使用和销毁"><a href="#1-Cookie的创建、使用和销毁" class="headerlink" title="1. Cookie的创建、使用和销毁"></a>1. Cookie的创建、使用和销毁</h2><p>cookie是在服务器端创建，并写回到客户端浏览器</p>
+<p>浏览器接到指令则在本地临时文件夹中创建了一个cookie文件，其中保存了你的cookie内容</p>
+<p>客户端浏览器每次访问网站时，都会检测是否有该网站的cookie信息，如果有的话，也会同时发送过去。</p>
+<p>注意：</p>
+<p>cookie内容的存储是<strong>键/值</strong>对的方式，<strong>键和值都只能是字符串</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setcookie( key , value ,有效期 )</td>
+<td>设置会话 cookie 参数</td>
+</tr>
+</tbody></table>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义cookie</span></span><br><span class="line"><span class="comment">//setcookie(键, 值, 有效期(秒))</span></span><br><span class="line">setcookie(<span class="string">"name"</span>,<span class="string">"zhangsan"</span>,time()+<span class="number">1000</span>); <span class="comment">//如果不设置有效期，关闭浏览器就会消失</span></span><br><span class="line">setcookie(<span class="string">"pwd"</span>,<span class="string">"123"</span>,time()+<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除cookie（设定过期时间，使失效）</span></span><br><span class="line">setcookie(<span class="string">"name"</span>,<span class="string">""</span>,time()<span class="number">-1</span>);</span><br><span class="line">setcookie(<span class="string">'age'</span>,<span class="keyword">null</span>,time()<span class="number">-1</span>);</span><br><span class="line">setcookie(<span class="string">'sex'</span>,<span class="string">""</span>,time()<span class="number">-1</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>在php中使用setcookie方法来创建cookie，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$re = setcookie ( <span class="string">'username'</span>, <span class="string">'xiaozhang'</span>, time () + <span class="number">30</span> * <span class="number">60</span>, <span class="string">'/'</span> );</span><br><span class="line">var_dump ( $re );</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>PHP中使用$_COOKIE全局变量来获取Cookie，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$re = $_COOKIE [<span class="string">'username'</span>];</span><br><span class="line">var_dump($re);</span><br></pre></td></tr></table></figure>
+
+<h3 id="销毁"><a href="#销毁" class="headerlink" title="销毁"></a>销毁</h3><p>PHP中没有直接销毁的方法，通常会将Cookie的过期时间重新设置一下。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$re = setcookie ( <span class="string">'username'</span>, <span class="keyword">null</span>, time () + <span class="number">1</span>, <span class="string">'/'</span> );</span><br><span class="line">var_dump($re);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-页面性能优化"><a href="#2-页面性能优化" class="headerlink" title="2. 页面性能优化"></a>2. 页面性能优化</h2><p>为了减少服务器的压力，并使服务器尽快响应客户端请求的页面，需要对页面进行优化。通常会从如下两个方面入手对页面进行优化：</p>
+<ol>
+<li>减少HTTP请求次数；</li>
+<li>静态资源和动态程序分开，即通过不同的域名访问。</li>
+</ol>
+<h3 id="3-建设HTTP请求次数"><a href="#3-建设HTTP请求次数" class="headerlink" title="3. 建设HTTP请求次数"></a>3. 建设HTTP请求次数</h3><p>减少HTTP请求次数的方法常见的有如下几种：</p>
+<ol>
+<li>制作图片地图，页面中出现了网页中所有的背景图片，允许一个图片关联多个url，即将多个图片合并为一个图片。</li>
+<li>使用雪碧图，简单的说就是CSS中的background-position来定位图片中的某一具体部分，这样就可以把多张小图片合并为一张大图片。</li>
+<li>合并JS和CSS文件，直接减少HTTP的请求次数。</li>
+<li>充分利用浏览器缓存，如果图片或者脚本，样式文件内容比较固定，不经常被修改，那么，尽可能利用缓存技术，减少HTTP请求次数或文件下载次数。</li>
+</ol>
+<h3 id="4-静态资源与动态程序分开"><a href="#4-静态资源与动态程序分开" class="headerlink" title="4. 静态资源与动态程序分开"></a>4. 静态资源与动态程序分开</h3><p>动静分离是让动态网站里的动态网页根据一定规则把不变的资源和经常变的资源区分开来，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作，这就是网站静态化处理的核心思路。</p>
+<h1 id="第六章-Socket通信"><a href="#第六章-Socket通信" class="headerlink" title="第六章 Socket通信"></a>第六章 Socket通信</h1><h2 id="1-简介-3"><a href="#1-简介-3" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>网络上的两个程序通过一个双向的通信连接实现数据的交换，这个连接的一端称为一个socket。socket（套接字）既不是程序，也不是协议，其只是操作系统提供的通信层的一组抽象API。</p>
+<p>通信需要服务端和客户端组成：</p>
+<p><strong>服务端：</strong></p>
+<ul>
+<li>使用php初始化socket然后绑定一个端口，对端口进行监听。</li>
+<li>调用accept阻塞，等待客户端连接。</li>
+</ul>
+<p><strong>客户端：</strong></p>
+<ul>
+<li>初始化一个socket，</li>
+<li>连接服务器，如果连接成功，客户端与服务器端建立连接。</li>
+<li>发送数据请求，服务器端接收请求并处理请求，把回应数据发送给客户端</li>
+<li>读取数据</li>
+<li>关闭连接，一次交互结束。</li>
+</ul>
+<p>客户端——服务端是可以彼此交互的应用程序。客户端和服务端之间的交互需要连接。Socket编程负责的就是为应用程序之间建立可进行交互的连接。</p>
+<p>Socket通信是双向的、长连接，它提供了网络通信的一些接口，我们基于这些接口可以控制数据的发送。</p>
+<p>在一般情况下，服务器多用PHP来开发Socket通信，客户端多用Javascript或者JQuery来开发Socket通信。</p>
+<table>
+<thead>
+<tr>
+<th>服务器端函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>socket_create($net,$stream,$protocol)</td>
+<td>创建Socket，参数：<br />$net：网络协议<br />$stream：socket流<br />$protocl：协议</td>
+</tr>
+<tr>
+<td>socket_bind()</td>
+<td>绑定ip和端口</td>
+</tr>
+<tr>
+<td>socket_listen()</td>
+<td>监听端口</td>
+</tr>
+<tr>
+<td>socket_accept()</td>
+<td>接受一个socket连接，与客户端建立连接</td>
+</tr>
+<tr>
+<td>socket_read()</td>
+<td>读取客户端发送过来的数据</td>
+</tr>
+<tr>
+<td>socket_write()</td>
+<td>将数据写到 socket 缓存 向客户端发送</td>
+</tr>
+<tr>
+<td>socket_close()</td>
+<td>关闭Socket连接</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>客户端函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Websocket(wsurl)</td>
+<td>向服务器发送连接</td>
+</tr>
+<tr>
+<td>send(string)</td>
+<td>向服务器发送数据</td>
+</tr>
+<tr>
+<td>onmessage事件</td>
+<td>监听服务器发送过来的数据</td>
+</tr>
+<tr>
+<td>onclose事件</td>
+<td>监听服务器开关状态</td>
+</tr>
+</tbody></table>
+<h2 id="2-Socket通信的工作原理"><a href="#2-Socket通信的工作原理" class="headerlink" title="2. Socket通信的工作原理"></a>2. Socket通信的工作原理</h2><p>根据连接启动的方式以及本地套接字要连接的目标，套接字之间的连接过程可以分为三个步骤：</p>
+<ol>
+<li>服务器监听：是服务器端套接字并不定位具体的客户端套接字，而是处于等待连接的状态，实时监控网络状态。</li>
+<li>客户端请求：是指由客户端的套接字提出连接请求，要连接的目标是服务器端的套接字。为此，客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。</li>
+<li>连接确认：是指当服务器端套接字监听到或者说接收到客户端套接字的连接请求，它就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发给客户端，一旦客户端确认了此描述，连接就建立好了。而服务器端套接字继续处于监听状态，继续接收其他客户端套接字的连接请求。</li>
+</ol>
+<p>socket通讯的工作原理可以参考下面的流程图：</p>
+<p>![socket通信服务端](C:\Users\李娜娜\Desktop\教研材料\02 中级\2-教案及其他可选案例\教案\Web前后端交互技术\images\socket通信服务端.png)</p>
+<h3 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">$ip = <span class="string">'127.0.0.1'</span>;</span><br><span class="line">$port = <span class="number">8001</span>;<span class="comment">//端口</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建socket</span></span><br><span class="line">$sock = socket_create(AF_INET,SOCK_STREAM,SOL_TCP）；</span><br><span class="line"><span class="comment">//参数：</span></span><br><span class="line"><span class="comment">//AF_INET： IPv4 网络协议。TCP 和 UDP 都可使用此协议。一般都用这个</span></span><br><span class="line"><span class="comment">//SOCK_STREAM:是基于TCP的，数据传输比较有保障   </span></span><br><span class="line"><span class="comment">//SOL_TCP:TCP 协议               </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//绑定ip和端口                      </span></span><br><span class="line">$ret = socket_bind($sock,$ip,$port)；</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听                      </span></span><br><span class="line">$ret = socket_listen($sock,<span class="number">4</span>)； <span class="comment">//最大监听套接字个数</span></span><br><span class="line"> </span><br><span class="line">$count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (($msgsock = socket_accept($sock)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"失败: "</span>.socket_strerror($msgsock) ;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//发到客户端</span></span><br><span class="line">        $msg =<span class="string">"测试成功！"</span>;</span><br><span class="line">        socket_write($msgsock, $msg, strlen($msg));</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"测试成功了啊"</span>;</span><br><span class="line">        </span><br><span class="line">        $buf = socket_read($msgsock,<span class="number">8192</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"收到的信息:&#123;$buf&#125;"</span>;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">if</span>(++$count &gt;= <span class="number">5</span>)&#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    socket_close($msgsock);</span><br><span class="line">&#125; <span class="keyword">while</span> (<span class="keyword">true</span>);</span><br><span class="line">                      </span><br><span class="line">socket_close($sock);</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="comment">//连接Socket的URL地址</span></span><br><span class="line">	<span class="keyword">var</span> wsurl = <span class="string">"ws://127.0.0.1:8001/socket_server.php"</span>;</span><br><span class="line">	<span class="keyword">var</span> websocket; <span class="comment">//用于存放客户端创建的Socket对象</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">window</span>.WebSocket) &#123;</span><br><span class="line">		websocket = <span class="keyword">new</span> WebSocket(wsurl);</span><br><span class="line">		websocket.onopen = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;<span class="comment">//onopen事件，连接成功</span></span><br><span class="line">			$(body).append(<span class="string">"&lt;p&gt;conneted success!&lt;/p&gt;"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		websocket.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;<span class="comment">//onmessage事件，接收消息，显示在页面上</span></span><br><span class="line">            <span class="keyword">var</span> msg = <span class="built_in">JSON</span>.parse(event.data);</span><br><span class="line">            <span class="built_in">console</span>.log(msg);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-Socket通信实现聊天室"><a href="#3-Socket通信实现聊天室" class="headerlink" title="3. Socket通信实现聊天室"></a>3. Socket通信实现聊天室</h2><h3 id="PHP实现Socket服务端"><a href="#PHP实现Socket服务端" class="headerlink" title="PHP实现Socket服务端"></a>PHP实现Socket服务端</h3><p>![图片1](C:\Users\李娜娜\Desktop\教研材料\02 中级\2-教案及其他可选案例\教案\Web前后端交互技术\images\图片1.png)</p>
+<h3 id="Js实现Socket客户端"><a href="#Js实现Socket客户端" class="headerlink" title="Js实现Socket客户端"></a>Js实现Socket客户端</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> WebSocket(<span class="string">"ws://localhost:8080/msg"</span>);ws.onopen = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span></span><br><span class="line"><span class="function"></span>&#123;	<span class="built_in">console</span>.log(<span class="string">"Connection open ..."</span>);	ws.send(<span class="string">"Hello WebSockets!"</span>);&#125;;ws.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span></span><br><span class="line"><span class="function"></span>&#123;	<span class="built_in">console</span>.log(<span class="string">"Received Message: "</span> + evt.data);	ws.close();&#125;;ws.onclose = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Connection closed."</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>üSocket概念、工作原理、服务端与客户端、通信协议、通信机制、通信过程</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>帅民
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/12/04/web%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/" title="web前后端数据交互">http://yoursite.com/2019/12/04/web前后端数据交互/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/04/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF/" rel="prev" title="响应式开发技术">
+      <i class="fa fa-chevron-left"></i> 响应式开发技术
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/04/PHP%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/" rel="next" title="PHP技术与应用">
+      PHP技术与应用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-HTTP通讯协议"><span class="nav-number">1.</span> <span class="nav-text">第一章 HTTP通讯协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简介"><span class="nav-number">1.1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-特点"><span class="nav-number">1.2.</span> <span class="nav-text">2. 特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-工作流程"><span class="nav-number">1.3.</span> <span class="nav-text">3. 工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Status-Code"><span class="nav-number">1.4.</span> <span class="nav-text">4. Status Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-AJAX的实现"><span class="nav-number">2.</span> <span class="nav-text">第二章 AJAX的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简介-1"><span class="nav-number">2.1.</span> <span class="nav-text">1. 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">2.1.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">2.1.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-AJAX工作原理"><span class="nav-number">2.2.</span> <span class="nav-text">2. AJAX工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XML"><span class="nav-number">2.2.1.</span> <span class="nav-text">XML</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-JSONP"><span class="nav-number">3.</span> <span class="nav-text">第三章 JSONP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-hello-world"><span class="nav-number">3.1.</span> <span class="nav-text">1. hello world</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端"><span class="nav-number">3.1.1.</span> <span class="nav-text">前端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后端"><span class="nav-number">3.1.2.</span> <span class="nav-text">后端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果"><span class="nav-number">3.1.3.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-原理"><span class="nav-number">3.2.</span> <span class="nav-text">2. 原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-iframe页面异步通信"><span class="nav-number">4.</span> <span class="nav-text">第四章 iframe页面异步通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简介-2"><span class="nav-number">4.1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-JS操作iframe标签"><span class="nav-number">4.2.</span> <span class="nav-text">2. JS操作iframe标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-JQuery操作iframe标签"><span class="nav-number">4.3.</span> <span class="nav-text">3. JQuery操作iframe标签</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五章-页面性能优化技术"><span class="nav-number">5.</span> <span class="nav-text">第五章 页面性能优化技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Cookie的创建、使用和销毁"><span class="nav-number">5.1.</span> <span class="nav-text">1. Cookie的创建、使用和销毁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建"><span class="nav-number">5.1.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">5.1.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#销毁"><span class="nav-number">5.1.3.</span> <span class="nav-text">销毁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-页面性能优化"><span class="nav-number">5.2.</span> <span class="nav-text">2. 页面性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-建设HTTP请求次数"><span class="nav-number">5.2.1.</span> <span class="nav-text">3. 建设HTTP请求次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-静态资源与动态程序分开"><span class="nav-number">5.2.2.</span> <span class="nav-text">4. 静态资源与动态程序分开</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第六章-Socket通信"><span class="nav-number">6.</span> <span class="nav-text">第六章 Socket通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简介-3"><span class="nav-number">6.1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Socket通信的工作原理"><span class="nav-number">6.2.</span> <span class="nav-text">2. Socket通信的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器端"><span class="nav-number">6.2.1.</span> <span class="nav-text">服务器端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端"><span class="nav-number">6.2.2.</span> <span class="nav-text">客户端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Socket通信实现聊天室"><span class="nav-number">6.3.</span> <span class="nav-text">3. Socket通信实现聊天室</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP实现Socket服务端"><span class="nav-number">6.3.1.</span> <span class="nav-text">PHP实现Socket服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Js实现Socket客户端"><span class="nav-number">6.3.2.</span> <span class="nav-text">Js实现Socket客户端</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="帅民"
+      src="/images/toux.jpg">
+  <p class="site-author-name" itemprop="name">帅民</p>
+  <div class="site-description" itemprop="description">喜欢爱笑的人</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">帅民</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
