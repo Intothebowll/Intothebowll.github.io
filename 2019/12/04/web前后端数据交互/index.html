@@ -40,22 +40,22 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="● HTTP通讯协议（Hypertext Transfer Protocol） ● AJAX（ Asynchronous JavaScript and XML）  第一章 HTTP通讯协议1. 简介协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。 HTTP（超文本传输协议）是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。 HTTP">
+  <meta name="description" content="● HTTP通讯协议（Hypertext Transfer Protocol） ● AJAX（ Asynchronous JavaScript and XML）  第一章 HTTP通讯协议1. 简介协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。 HTTP（超文本传输协议）是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web前后端数据交互">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;04&#x2F;web%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92&#x2F;index.html">
 <meta property="og:site_name" content="帅民的博客">
-<meta property="og:description" content="● HTTP通讯协议（Hypertext Transfer Protocol） ● AJAX（ Asynchronous JavaScript and XML）  第一章 HTTP通讯协议1. 简介协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。 HTTP（超文本传输协议）是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。 HTTP">
+<meta property="og:description" content="● HTTP通讯协议（Hypertext Transfer Protocol） ● AJAX（ Asynchronous JavaScript and XML）  第一章 HTTP通讯协议1. 简介协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。 HTTP（超文本传输协议）是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="c:&#x2F;Users&#x2F;%E6%9D%8E%E5%A8%9C%E5%A8%9C&#x2F;Desktop&#x2F;%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99&#x2F;02%20%E4%B8%AD%E7%BA%A7&#x2F;2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B&#x2F;%E6%95%99%E6%A1%88&#x2F;Web%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%8A%80%E6%9C%AF&#x2F;images&#x2F;http.png">
 <meta property="og:image" content="c:&#x2F;Users&#x2F;%E6%9D%8E%E5%A8%9C%E5%A8%9C&#x2F;Desktop&#x2F;%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99&#x2F;02%20%E4%B8%AD%E7%BA%A7&#x2F;2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B&#x2F;%E6%95%99%E6%A1%88&#x2F;Web%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%8A%80%E6%9C%AF&#x2F;images&#x2F;ajax.jpg">
 <meta property="og:image" content="c:&#x2F;Users&#x2F;%E6%9D%8E%E5%A8%9C%E5%A8%9C&#x2F;Desktop&#x2F;%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99&#x2F;02%20%E4%B8%AD%E7%BA%A7&#x2F;2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B&#x2F;%E6%95%99%E6%A1%88&#x2F;PHP%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8&#x2F;images&#x2F;cookie.png">
-<meta property="og:updated_time" content="2019-07-01T07:35:10.000Z">
+<meta property="og:updated_time" content="2019-12-05T07:49:21.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="c:&#x2F;Users&#x2F;%E6%9D%8E%E5%A8%9C%E5%A8%9C&#x2F;Desktop&#x2F;%E6%95%99%E7%A0%94%E6%9D%90%E6%96%99&#x2F;02%20%E4%B8%AD%E7%BA%A7&#x2F;2-%E6%95%99%E6%A1%88%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%AF%E9%80%89%E6%A1%88%E4%BE%8B&#x2F;%E6%95%99%E6%A1%88&#x2F;Web%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%8A%80%E6%9C%AF&#x2F;images&#x2F;http.png">
 
@@ -218,7 +218,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-07-01 15:35:10" itemprop="dateModified" datetime="2019-07-01T15:35:10+08:00">2019-07-01</time>
+                <time title="修改时间：2019-12-05 15:49:21" itemprop="dateModified" datetime="2019-12-05T15:49:21+08:00">2019-12-05</time>
               </span>
 
           
@@ -237,6 +237,8 @@
 <hr>
 <h1 id="第一章-HTTP通讯协议"><a href="#第一章-HTTP通讯协议" class="headerlink" title="第一章 HTTP通讯协议"></a>第一章 HTTP通讯协议</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。</p>
 <p>HTTP（超文本传输协议）是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。</p>
+<a id="more"></a>
+
 <p>HTTP消息结构</p>
 <table>
 <thead>
