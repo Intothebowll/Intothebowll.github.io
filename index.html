@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-12-12 12:38:39 / 修改时间：13:11:23" itemprop="dateCreated datePublished" datetime="2019-12-12T12:38:39+08:00">2019-12-12</time>
+              <time title="创建时间：2019-12-12 12:38:39 / 修改时间：13:17:48" itemprop="dateCreated datePublished" datetime="2019-12-12T12:38:39+08:00">2019-12-12</time>
             </span>
 
           
@@ -224,28 +224,8 @@
       
           <h1 id="编写一个获取后台连接动态生成轮播图的例子"><a href="#编写一个获取后台连接动态生成轮播图的例子" class="headerlink" title="编写一个获取后台连接动态生成轮播图的例子"></a>编写一个获取后台连接动态生成轮播图的例子</h1><p>​        平时自己写的轮播图组件都是根据现成的图片来进行定量的设计，在后阶段的学习实践过程中发现这种代码的局限性太大了，在想拿到后台轮播图的数据在渲染到前端页面总得花费一般功夫，不如就自己封装一个轮播图代码吧！（前端菜鸟！大神不用看啦，代码其实也是很简单的，原创原创原创）</p>
 <h2 id="一、首先对html进行构建"><a href="#一、首先对html进行构建" class="headerlink" title="一、首先对html进行构建"></a>一、首先对html进行构建</h2><p>​        封装一个轮播图组件，当然是为了他的复用性，所以代码的嵌入性能很关键，不能写一个不能适应各种页面环境的代码出来….废话不多说，开始吧</p>
-<p>​        首先是对一整个轮播图的html框架的设计，由一个大盒子包裹住这个轮播图所有要实现的内容先<br>$$</p>
-<div class="rotationPhoto">
-    <div class="mainPicture">
-        <ul>
-            <!--<li><a href=""><img src="" alt=""></a></li>-->
-        </ul>
-    </div>
-    <div class="left">
-        //这里我放了两个svg图，是轮播图的左右按钮
-    </div>
-    <div class="right">
-        //这里我放了两个svg图，是轮播图的左右按钮
-    </div>
-    <div class="smallCircle">
-        <ul>
-            <!--<li class="smallCircle-itemCurrent"></li>-->
-            <!--<li class="smallCircle-item"></li>-->
-        </ul>
-    </div>
-</div>
-$$
-​        其中mainPicture是放轮播图的主图的盒子，其中照片在ul的每一个li中
+<p>​        首先是对一整个轮播图的html框架的设计，由一个大盒子包裹住这个轮播图所有要实现的内容先</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"rotationPhoto"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"mainPicture"</span>&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;!--<span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>--&gt;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="left"&gt;</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/这里我放了两个svg图，是轮播图的左右按钮</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"right"</span>&gt;</span><br><span class="line">        <span class="comment">//这里我放了两个svg图，是轮播图的左右按钮</span></span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="smallCircle"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;ul&gt;</span></span><br><span class="line"><span class="regexp">            &lt;!--&lt;li class="smallCircle-itemCurrent"&gt;&lt;/</span>li&gt;--&gt;</span><br><span class="line">            &lt;!--<span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"smallCircle-item"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>--&gt;</span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>​        而smallCircle是轮播图中跟着主图运动的小标识</p>
 <p>​        而left和right两个盒子则是放轮播图前进和后退的两个按钮，我是用svg图来显示这两个按钮的</p>
@@ -261,7 +241,7 @@ $$
 <p>　　5．超级颜色控制</p>
 <p>　　　　SVG图像提供一个1 600万种颜色的调色板，支持ICC颜色描述文件标准、RGB、线X填充、渐变和蒙版</p>
 <p>​        就是它不是所有的浏览器都能支持的~</p>
-<h2 id="二、对CSS样式的设定"><a href="#二、对CSS样式的设定" class="headerlink" title="二、对CSS样式的设定"></a>二、对CSS样式的设定</h2><p><img src="images/lunbo.png" alt="lunbo"></p>
+<h2 id="二、对CSS样式的设定"><a href="#二、对CSS样式的设定" class="headerlink" title="二、对CSS样式的设定"></a>二、对CSS样式的设定</h2><p><img src="/.com//lunbo.png" alt="lunbo"></p>
 <p>那么如何将上面的html代码美化成我们需要的样式布局呢？</p>
 <p>来看看我的思路吧！</p>
 <p>首先我把最外层的这个大盒子设置为了弹性元素</p>
