@@ -535,7 +535,7 @@
 </thead>
 <tbody><tr>
 <td>gettype()</td>
-<td>判断变量类型：<br />返回 boolean、integer、double（ float 返回 “double”）、string、array、object、resource、null、unknown type</td>
+<td>判断变量类型：<br>返回 boolean、integer、double（ float 返回 “double”）、string、array、object、resource、null、unknown type</td>
 </tr>
 <tr>
 <td>isset()</td>
@@ -547,7 +547,7 @@
 </tr>
 <tr>
 <td>其他</td>
-<td>判断变量类型的系列函数<br />is_array()、is_bool()、is_float()、is_integer()、is_null()、is_numeric()、is_object()、is_resource()、 is_string() 和 is_scalar()是否为标量</td>
+<td>判断变量类型的系列函数<br>is_array()、is_bool()、is_float()、is_integer()、is_null()、is_numeric()、is_object()、is_resource()、 is_string() 和 is_scalar()是否为标量</td>
 </tr>
 </tbody></table>
 <h3 id="常用数学运算函数"><a href="#常用数学运算函数" class="headerlink" title="常用数学运算函数"></a>常用数学运算函数</h3><table>
@@ -870,7 +870,7 @@
 </tr>
 <tr>
 <td>array_splice(数组，索引，数量)</td>
-<td>删除指定元素（<br />删除元素后，会重排数组索引，用unset删除不会重排数组索引）</td>
+<td>删除指定元素（<br>删除元素后，会重排数组索引，用unset删除不会重排数组索引）</td>
 </tr>
 <tr>
 <td>sort()</td>
@@ -898,7 +898,7 @@
 </tr>
 <tr>
 <td>json_decode( 字符串，参数 )</td>
-<td>对 JSON 格式的字符串进行解码，参数：<br />true : 返回 数组<br />false : 返回 对象</td>
+<td>对 JSON 格式的字符串进行解码，参数：<br>true : 返回 数组<br>false : 返回 对象</td>
 </tr>
 </tbody></table>
 <h1 id="第四章-运算符"><a href="#第四章-运算符" class="headerlink" title="第四章 运算符"></a>第四章 运算符</h1><table>
@@ -1132,19 +1132,19 @@
 </thead>
 <tbody><tr>
 <td>preg_match(正则 , 字符串 , 结果数组)</td>
-<td>单一匹配  <br />结果数组: 第一个匹配到的结果<br />返回：匹配数量 （错误:false）</td>
+<td>单一匹配  <br>结果数组: 第一个匹配到的结果<br>返回：匹配数量 （错误:false）</td>
 </tr>
 <tr>
 <td>preg_match_all(正则 , 字符串 , 结果数组)</td>
-<td>匹配所有 <br />结果数组: 全部匹配到的结果<br />返回：匹配数量（错误:false）</td>
+<td>匹配所有 <br>结果数组: 全部匹配到的结果<br>返回：匹配数量（错误:false）</td>
 </tr>
 <tr>
 <td>preg_replace(正则 , 替换 , 被替换字符串)</td>
-<td>替换<br />返回：替换后字符串</td>
+<td>替换<br>返回：替换后字符串</td>
 </tr>
 <tr>
 <td>preg_split( 正则 , 字符串)</td>
-<td>用正则分割字符串<br />返回：数组</td>
+<td>用正则分割字符串<br>返回：数组</td>
 </tr>
 </tbody></table>
 <h2 id="3-元字符"><a href="#3-元字符" class="headerlink" title="3. 元字符"></a>3. 元字符</h2><p>正则模式当中的元字符，通常都具有特殊的含义</p>
@@ -1281,7 +1281,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$str=<span class="string">"&lt;script&gt;alert('web前端')&lt;/script&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//$ 字符具有特定的含义。代表第 1 到第 99 个子表达式</span></span><br><span class="line">$str=preg_replace(<span class="string">'/&lt;script&gt;(.*?)&lt;\/script&gt;/'</span>, <span class="string">"$1"</span>, $str);</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果：$str=alert('web前端')</span></span><br></pre></td></tr></table></figure>
 
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><table>
+<h1 id><a href="#" class="headerlink" title></a></h1><table>
 <thead>
 <tr>
 <th></th>
@@ -1747,7 +1747,7 @@
 </tr>
 <tr>
 <td>pathinfo($path，参数)</td>
-<td>获取路径中的大部分信息，返回数组，参数：<br />PATHINFO_DIRNAME    PATHINFO_BASENAME  <br />PATHINFO_EXTENSION   PATHINFO_FILENAME</td>
+<td>获取路径中的大部分信息，返回数组，参数：<br>PATHINFO_DIRNAME    PATHINFO_BASENAME  <br>PATHINFO_EXTENSION   PATHINFO_FILENAME</td>
 </tr>
 </tbody></table>
 <h2 id="2-目录操作"><a href="#2-目录操作" class="headerlink" title="2. 目录操作"></a>2. 目录操作</h2><h3 id="目录操作函数"><a href="#目录操作函数" class="headerlink" title="目录操作函数"></a>目录操作函数</h3><table>
@@ -1783,7 +1783,7 @@
 </tr>
 <tr>
 <td>scandir(完整路径目录)</td>
-<td>扫描目录，返回文件数组<br /> 特例：  count（数组）==2   是空目录</td>
+<td>扫描目录，返回文件数组<br> 特例：  count（数组）==2   是空目录</td>
 </tr>
 </tbody></table>
 <h3 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义目录</span></span><br><span class="line">$path = <span class="string">"目录"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打开目录</span></span><br><span class="line">$res = opendir($path);</span><br><span class="line"></span><br><span class="line"><span class="comment">//读取目录中的文件（每次调用，读取一个）</span></span><br><span class="line">$file = readdir($res);</span><br><span class="line"></span><br><span class="line"><span class="comment">//关闭目录</span></span><br><span class="line">closedir($res);</span><br></pre></td></tr></table></figure>
@@ -1837,11 +1837,11 @@
 </tr>
 <tr>
 <td>file_get_contents(完整路径文件名)</td>
-<td>将整个文件读入一个字符串<br />相当于 fopen fread fclose组合动作</td>
+<td>将整个文件读入一个字符串<br>相当于 fopen fread fclose组合动作</td>
 </tr>
 <tr>
 <td>file_put_contents(完整路径文件名，要写入的数据，[FILE_APPEND])</td>
-<td>将字符串写入文件<br />相当于 fopen fwrite fclose组合动作FILE_APPEND：追加写入</td>
+<td>将字符串写入文件<br>相当于 fopen fwrite fclose组合动作FILE_APPEND：追加写入</td>
 </tr>
 <tr>
 <td>readfile()</td>
@@ -1897,7 +1897,7 @@
 </thead>
 <tbody><tr>
 <td>rename(源 , 目标)</td>
-<td>相同文件夹为 <code>改名</code>，不同文件夹为 <code>移动</code><br />移动 <code>文件</code>，如果目标文件已存在，将会被覆盖<br />移动 <code>目录</code>，如果目标目录已存在，将会报错，返回false</td>
+<td>相同文件夹为 <code>改名</code>，不同文件夹为 <code>移动</code><br>移动 <code>文件</code>，如果目标文件已存在，将会被覆盖<br>移动 <code>目录</code>，如果目标目录已存在，将会报错，返回false</td>
 </tr>
 </tbody></table>
 <h1 id="第十一章-文件上传和下载"><a href="#第十一章-文件上传和下载" class="headerlink" title="第十一章 文件上传和下载"></a>第十一章 文件上传和下载</h1><h2 id="1-上传设置"><a href="#1-上传设置" class="headerlink" title="1. 上传设置"></a>1. 上传设置</h2><h3 id="客户端设置"><a href="#客户端设置" class="headerlink" title="客户端设置"></a>客户端设置</h3><p>form的method=post<br>form的enctype=”multipart/form-data”<br>input的type=file</p>
@@ -2085,7 +2085,7 @@
 </tr>
 <tr>
 <td>getimagesize(完整路径文件名)</td>
-<td>获取图像的宽、高、大小、类型等相关信息<br />成功返回：数组   失败返回：false</td>
+<td>获取图像的宽、高、大小、类型等相关信息<br>成功返回：数组   失败返回：false</td>
 </tr>
 <tr>
 <td>imagesx(资源)</td>
@@ -2097,7 +2097,7 @@
 </tr>
 <tr>
 <td>imagecopy()</td>
-<td>用于拷贝图像或图像的一部分  <br />成功返回：true ，失败返回：false</td>
+<td>用于拷贝图像或图像的一部分  <br>成功返回：true ，失败返回：false</td>
 </tr>
 <tr>
 <td>imagecopyresampled()</td>
@@ -2200,7 +2200,7 @@
 
 
 
-<h3 id="POST"><a href="#POST" class="headerlink" title="$_POST[ ]"></a>$_POST[ ]</h3><p>同form_get.html，我们建立一个名叫form_post.html，内容仅仅把<form>元素的action和method修改一下：</p>
+<h3 id="POST"><a href="#POST" class="headerlink" title="$_POST[ ]"></a>$_POST[ ]</h3><p>同form_get.html，我们建立一个名叫form_post.html，内容仅仅把<form>元素的action和method修改一下：</form></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>POST方式的表单<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"form_post.php"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">            账户：<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">            密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">type</span>=<span class="string">"password"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">            邮箱：<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">type</span>=<span class="string">"email"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>运行界面除了地址栏和标题栏，其他内容完全和form_get.html一致。这时候点击跳转到同目录下的form_post.php文件，文件内容为：</p>
@@ -2505,23 +2505,23 @@
 </thead>
 <tbody><tr>
 <td>__get(属性名)</td>
-<td>当在类外部<strong>访问</strong>非公有成员属性时，自动调用，<br />并且，参数传入要获取的成员属性的名称，返回获取的属性值</td>
+<td>当在类外部<strong>访问</strong>非公有成员属性时，自动调用，<br>并且，参数传入要获取的成员属性的名称，返回获取的属性值</td>
 </tr>
 <tr>
 <td>__unset(属性名)</td>
-<td>当在类外部<strong>销毁</strong>非公有成员属性时，自动调用，<br />并且，将正在销毁的成员属性名传递进来</td>
+<td>当在类外部<strong>销毁</strong>非公有成员属性时，自动调用，<br>并且，将正在销毁的成员属性名传递进来</td>
 </tr>
 <tr>
 <td>__set(属性名，属性值)</td>
-<td>当在类外部<strong>设置</strong>非公有成员属性时，自动调用，<br />并且，将正在添加的成员属性的名字和值同时传进来</td>
+<td>当在类外部<strong>设置</strong>非公有成员属性时，自动调用，<br>并且，将正在添加的成员属性的名字和值同时传进来</td>
 </tr>
 <tr>
 <td>__isset(属性名)</td>
-<td>当在类外部<strong>判断</strong>非公有成员属性是否存在时，自动调用，<br />并且，将正在判断的属性名传进来</td>
+<td>当在类外部<strong>判断</strong>非公有成员属性是否存在时，自动调用，<br>并且，将正在判断的属性名传进来</td>
 </tr>
 <tr>
 <td>__call(方法名和参数列表)</td>
-<td>当在类外部<strong>访问</strong>非公有成员<strong>方法</strong>时，自动调用，<br />并且，将正在访问的方法名和参数列表传进来</td>
+<td>当在类外部<strong>访问</strong>非公有成员<strong>方法</strong>时，自动调用，<br>并且，将正在访问的方法名和参数列表传进来</td>
 </tr>
 </tbody></table>
 <p>gusic魔术方法在实际开发中，并不经常使用，仅作为知识点掌握即可。</p>
@@ -2918,7 +2918,7 @@
 <td>当前脚本所在文件系统（不是文档根目录）的基本路径</td>
 </tr>
 </tbody></table>
-
+</form>
     </div>
 
     
