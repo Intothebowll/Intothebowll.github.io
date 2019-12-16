@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Flex布局采用flex布局的元素称为flex布局，简称 “容器” — flex container 它的所有子元素自动成为容器的成员，称之为 “项目” 任何一个容器都可以指定为flex布局   —&amp;gt; .box{display:flex;} 行内元素也可以使用flex布局   —&amp;gt;.box{display:inline-flex;} Webkit内核的浏览器，必须加上-webkit前缀">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flex布局">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;12&#x2F;Flex%E5%B8%83%E5%B1%80&#x2F;index.html">
+<meta property="og:site_name" content="帅民的博客">
+<meta property="og:description" content="Flex布局采用flex布局的元素称为flex布局，简称 “容器” — flex container 它的所有子元素自动成为容器的成员，称之为 “项目” 任何一个容器都可以指定为flex布局   —&amp;gt; .box{display:flex;} 行内元素也可以使用flex布局   —&amp;gt;.box{display:inline-flex;} Webkit内核的浏览器，必须加上-webkit前缀">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-12T15:30:39.782Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/12/Flex%E5%B8%83%E5%B1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Flex布局 | 帅民的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">帅民的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">努力进取的程序猿</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">8</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/Flex%E5%B8%83%E5%B1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/toux.jpg">
+      <meta itemprop="name" content="帅民">
+      <meta itemprop="description" content="喜欢爱笑的人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="帅民的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flex布局
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-12 23:30:39" itemprop="dateCreated datePublished" datetime="2019-12-12T23:30:39+08:00">2019-12-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Flex布局"><a href="#Flex布局" class="headerlink" title="Flex布局"></a>Flex布局</h1><p>采用flex布局的元素称为flex布局，简称 “容器” — flex container</p>
+<p>它的所有子元素自动成为容器的成员，称之为 “项目”</p>
+<p>任何一个容器都可以指定为flex布局   —&gt; .box{display:flex;}</p>
+<p>行内元素也可以使用flex布局   —&gt;.box{display:inline-flex;}</p>
+<p>Webkit内核的浏览器，必须加上-webkit前缀   —&gt; .box{display:-webkit-flex;/* Safari */display:flex;}</p>
+<p><strong>设为Flex布局以后，子元素的float、clear和vertical-align属性将失效</strong></p>
+<p>*容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。</p>
+<p>项目默认沿主轴排列,单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size*</p>
+<h2 id="一、flex-container"><a href="#一、flex-container" class="headerlink" title="一、flex-container"></a>一、flex-container</h2><p>容器一共有5个属性：</p>
+<p>​        ① flex-direction</p>
+<p>​        ② flex-wrap</p>
+<p>​        ③ justify-content</p>
+<p>​        ④ align-items</p>
+<p>​        ⑤ align-content</p>
+<p>现在让我们来分别了解了解他们的作用吧</p>
+<p>① flex-direction：决定主轴的方向，它一共有4个值</p>
+<p>​        <em>row(默认值) | row-reverse | column | column-reverse</em></p>
+<p>​            row:  主轴为水平方向，起点在左端</p>
+<p>​                row-reverse: 主轴为水平方向，起点在右端</p>
+<p>​                    column: 主轴为垂直方向，起点在上沿</p>
+<p>​                        column-reverse: 主轴为垂直方向，起点在下沿</p>
+<p>② flex-wrap：默认情况下，项目都排在一条线（又称”轴线”）上 , 而flex-wrap属性定义，如果一条轴线排不下，项目该如何换行，它一共有3个值</p>
+<p>​        <em>nowrap(默认值) | wrap | wrap-reverse</em></p>
+<p>​            nowrap：不换行</p>
+<p>​                wrap：换行，第一行在上方</p>
+<p>​                    wrap-reverse：换行，第一行在下方</p>
+<p>③ justify-content：定义了项目在主轴上的对齐方式，它一共有5个值</p>
+<p>​        <em>flex-start | flex-end | center | space-between | space-around</em></p>
+<p>​              ↑                ↑                ↑                    ↑                        ↑</p>
+<pre><code>左对齐       右对齐       居中     两端对齐，项目   每个项目两边</code></pre><p>​                                                               之间间隔相等        间隔一样</p>
+<p>④ align-items：定义项目在交叉轴上如何对齐（假如主轴是横轴，交叉轴就是竖轴，反之即反之），它一共有5个值</p>
+<p>​        <em>flex-start  | flex-end | center | baseline | stretch(默认值)</em></p>
+<p>​              ↑                  ↑              ↑              ↑                ↑</p>
+<p>对齐交叉轴的起点                                    如果项目未设置高度或设为auto，将占满整个容器的高度        </p>
+<p>​                  对齐交叉轴的终点        对齐项目第一行文字的基线</p>
+<p>​                                        对齐交叉轴的中点</p>
+<p>⑤ align-content：定义了多根轴线的对齐方式，如果项目只有一根轴线，该属性不起作用，它一共有6个值</p>
+<p>​    <em>flex-start  | flex-end | center | space-between | space-around | stretch(默认值)</em></p>
+<p>​              ↑              ↑              ↑                   ↑                           ↑                      ↑    轴线占满整个交叉轴</p>
+<p>对齐交叉轴的起点                                            每根轴线两侧的间隔都相等        </p>
+<p>​                  对齐交叉轴的终点     与交叉轴两端对齐，轴线之间的间隔平均分布</p>
+<p>​                                        对齐交叉轴的中点</p>
+<h2 id="二、flex-item"><a href="#二、flex-item" class="headerlink" title="二、flex-item"></a>二、flex-item</h2><p>项目一共有6个属性：</p>
+<p>​        ① order</p>
+<p>​        ② flex-grow</p>
+<p>​        ③ flex-shrink</p>
+<p>​        ④ flex-basis</p>
+<p>​        ⑤ flex</p>
+<p>​        ⑥ align-self</p>
+<p>① order：定义项目的排列顺序。数值越小，排列越靠前，默认为0</p>
+<p>② flex-grow：定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大</p>
+<p>​        <em>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍</em></p>
+<p>③ flex-shrink：定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小</p>
+<p>​        <em>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小，负值对该属性无效</em></p>
+<p>④ flex-basis：定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小</p>
+<p>​        <em>它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间</em></p>
+<p>⑤ flex：flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto，后两个属性可选</p>
+<p>​        <em>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)</em></p>
+<p>​        <em>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值</em></p>
+<p>⑥ align-self：align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch</p>
+<p>​        <em>该属性可能取6个值，除了auto，其他都与align-items属性完全一致</em></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>帅民
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/12/12/Flex%E5%B8%83%E5%B1%80/" title="Flex布局">http://yoursite.com/2019/12/12/Flex布局/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/12/%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E8%8E%B7%E5%8F%96%E5%90%8E%E5%8F%B0%E8%BF%9E%E6%8E%A5%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E8%BD%AE%E6%92%AD%E5%9B%BE%E7%9A%84%E4%BE%8B%E5%AD%90/" rel="prev" title="编写一个获取后台连接动态生成轮播图的例子">
+      <i class="fa fa-chevron-left"></i> 编写一个获取后台连接动态生成轮播图的例子
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/16/%E5%85%B3%E4%BA%8Evue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%8A%A8%E6%80%81%E6%B8%B2%E6%9F%93%E6%8B%BF%E5%88%B0%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%B0%E5%9D%80%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/" rel="next" title="关于vue项目中动态渲染拿到的本地图片字符串地址引用问题">
+      关于vue项目中动态渲染拿到的本地图片字符串地址引用问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flex布局"><span class="nav-number">1.</span> <span class="nav-text">Flex布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、flex-container"><span class="nav-number">1.1.</span> <span class="nav-text">一、flex-container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、flex-item"><span class="nav-number">1.2.</span> <span class="nav-text">二、flex-item</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="帅民"
+      src="/images/toux.jpg">
+  <p class="site-author-name" itemprop="name">帅民</p>
+  <div class="site-description" itemprop="description">喜欢爱笑的人</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:365401075@qq.com" title="E-Mail → mailto:365401075@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">帅民</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
